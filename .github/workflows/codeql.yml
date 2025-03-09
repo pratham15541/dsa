@@ -44,7 +44,7 @@ jobs:
       matrix:
         include:
         - language: c-cpp
-          build-mode: autobuild
+          build-mode: manual
         - language: java-kotlin
           build-mode: manual # This mode only analyzes Java. Set this to 'autobuild' or 'manual' to analyze Kotlin too.
         - language: javascript-typescript
@@ -88,7 +88,7 @@ jobs:
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     - if: matrix.build-mode == 'manual'
       shell: bash
-      run: |
+      run: make bootstrap make release |
         echo 'If you are using a "manual" build mode for one or more of the' \
           'languages you are analyzing, replace this with the commands to build' \
           'your code, for example:'
