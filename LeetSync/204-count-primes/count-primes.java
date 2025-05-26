@@ -2,25 +2,28 @@ class Solution {
     public int countPrimes(int n) {
         if (n <= 2) return 0;
 
+        // Mark only odd indices as potentially prime (skip evens)
         boolean[] isPrime = new boolean[n];
         Arrays.fill(isPrime, true);
-
-        // 0 and 1 are not prime
         isPrime[0] = false;
         isPrime[1] = false;
 
-        for (int i = 2; i * i < n; i++) {
-            if (isPrime[i]) {
-                for (int j = i * i; j < n; j += i) {
-                    isPrime[j] = false;
-                }
+        // Start from 3, skip even numbers
+        for (int i = 3; i * i < n; i += 2) {
+            if (!isPrime[i]) continue;
+
+            // Mark all odd multiples of i as non-prime
+            for (int j = i * i; j < n; j += 2 * i) {
+                isPrime[j] = false;
             }
         }
 
-        int count = 0;
-        for (int i = 2; i < n; i++) {
+        // Count primes: we know 2 is prime, and only count odd numbers from 3 onward
+        int count = 1; // for prime 2
+        for (int i = 3; i < n; i += 2) {
             if (isPrime[i]) count++;
         }
+
         return count;
     }
 }
