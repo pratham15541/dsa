@@ -2,21 +2,16 @@ import java.util.*;
 
 class Solution {
     public int maxFrequencyElements(int[] nums) {
-        Map<Integer, Integer> freqMap = new HashMap<>();
+        int[] freq = new int[101];  // Assuming input is in range [1, 100]
+        int maxFreq = 0, result = 0;
 
-    
         for (int num : nums) {
-            freqMap.merge(num, 1, Integer::sum);
-        }
-
-
-        int maxFreq = Collections.max(freqMap.values());
-
-        
-        int result = 0;
-        for (int freq : freqMap.values()) {
-            if (freq == maxFreq) {
-                result += freq;
+            freq[num]++;
+            if (freq[num] > maxFreq) {
+                maxFreq = freq[num];
+                result = maxFreq;
+            } else if (freq[num] == maxFreq) {
+                result += maxFreq;
             }
         }
 
