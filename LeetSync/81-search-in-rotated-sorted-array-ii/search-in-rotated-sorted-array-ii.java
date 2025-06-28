@@ -13,13 +13,13 @@ class Solution {
                 h--;
 
             } else if (nums[l] <= nums[mid]) {
-                if (nums[l] <= target && target < nums[mid]) {
+                if (nums[l] <= target && target <= nums[mid]) {
                     h = mid - 1;
                 } else {
                     l = mid + 1;
                 }
             } else {
-                if (nums[mid] < target && target <= nums[h]) {
+                if (nums[mid] <= target && target <= nums[h]) {
                     l = mid + 1;
                 } else {
                     h = mid - 1;
