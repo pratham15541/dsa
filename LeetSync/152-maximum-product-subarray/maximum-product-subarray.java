@@ -1,16 +1,15 @@
 class Solution {
     public int maxProduct(int[] nums) {
-        int maxProduct = Integer.MIN_VALUE;
-        int prefix = 1;
-        int suffix = 1;
-        int n = nums.length;
+       int maxProduct = nums[0],
+       currMin = nums[0],
+       currMax = nums[0];
 
-        for (int i = 0; i < n; i++) {
-            prefix = (prefix == 0 ? 1 : prefix) * nums[i];
-            suffix = (suffix == 0 ? 1 : suffix) * nums[n - 1 - i];
-            maxProduct = Math.max(maxProduct, Math.max(prefix, suffix));
-        }
-
-        return maxProduct;
+       for(int i=1;i<nums.length;i++){
+        int temp = currMax;
+        currMax = Math.max(nums[i], Math.max(currMax*nums[i], currMin * nums[i]));
+        currMin = Math.min(nums[i], Math.min(temp*nums[i], currMin * nums[i]));
+          maxProduct = Math.max(maxProduct, currMax);
+       }
+       return maxProduct;
     }
 }
