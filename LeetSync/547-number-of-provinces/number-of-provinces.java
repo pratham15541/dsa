@@ -1,25 +1,28 @@
 class Solution {
     public int findCircleNum(int[][] isConnected) {
-        //asking if graph connected or not
-        //we can use dfs or bfs
         int n = isConnected.length;
         boolean[] visited = new boolean[n];
         int provinces = 0;
-        for(int i=0;i<n;i++){
-            if(!visited[i]){
-                dfs(isConnected,visited,i);
-                provinces++;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                Queue<Integer> q = new LinkedList<>();
+                q.add(i);
+                visited[i] = true;
+
+                while (!q.isEmpty()) {
+                    int city = q.poll();
+                    for (int j = 0; j < n; j++) {
+                        if (isConnected[city][j] == 1 && !visited[j]) {
+                            visited[j] = true;
+                            q.add(j);
+                        }
+                    }
+                }
+
+                provinces++; 
             }
         }
         return provinces;
-    }
-    private void dfs(int[][] isConnected, boolean[] visited, int i){
-            visited[i] = true;
-
-        for(int j=0;j<isConnected.length;j++){
-            if(isConnected[i][j] == 1 && !visited[j]){
-                dfs(isConnected,visited,j);
-            }
-        }
     }
 }
