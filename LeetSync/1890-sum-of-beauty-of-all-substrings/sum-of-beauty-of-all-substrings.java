@@ -1,10 +1,11 @@
 class Solution {
     public int beautySum(String s) {
-       int n = s.length();
+        int n = s.length();
         int sum = 0;
+        Map<Character, Integer> mp = new HashMap<>();
 
         for (int i = 0; i < n; i++) {
-            Map<Character, Integer> mp = new HashMap<>();
+            mp.clear(); 
             for (int j = i; j < n; j++) {
                 char c = s.charAt(j);
                 mp.put(c, mp.getOrDefault(c, 0) + 1);
