@@ -1,18 +1,15 @@
 class Solution {
     public String reverseWords(String s) {
-        String[] arr = s.trim().split("\\s+"); // also trims extra spaces
-        reverse(arr);
-        return String.join(" ", arr);
-    }
-
-    private void reverse(String[] arr) {
-        int l = 0, r = arr.length - 1;
-        while (l < r) {
-            String temp = arr[l];
-            arr[l] = arr[r];
-            arr[r] = temp;
-            l++;  
-            r--;   
-        }
+       s= s.trim();
+       StringBuilder sb = new StringBuilder();
+       int i = s.length() -1;
+       int j = i;
+       while(i>= 0){
+        while(i>=0 && s.charAt(i) != ' ') i--;
+        sb.append(s.substring(i+1,j+1)).append(' ');
+        while(i>=0 && s.charAt(i) == ' ') i--;
+        j=i;
+       }
+       return sb.toString().trim();  
     }
 }
