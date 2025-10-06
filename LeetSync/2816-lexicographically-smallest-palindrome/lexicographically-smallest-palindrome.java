@@ -4,7 +4,6 @@ class Solution {
 
         int l =0;
         int r = s.length()-1;
-        StringBuilder sb = new StringBuilder();
         while(l<r){
            if (arr[l] != arr[r]) {
                 if (arr[l] < arr[r]) {
